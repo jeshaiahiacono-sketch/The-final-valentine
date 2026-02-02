@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Valentine?</title>
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script>
+    (function(){
+      emailjs.init("TfDgqxFjHc9VoV44P"); // User ID
+    })();
+  </script>
+  <style>
+    body {
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #2b0f14, #4a1c24);
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
+    .container {
+      text-align: center;
+    }
+    h1 {
+      color: #ffffff;
+      font-size: 2.6rem;
+      margin-bottom: 40px;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.6);
+    }
+    button {
+      padding: 15px 30px;
+      font-size: 22px;
+      border: none;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    #yes {
+      background-color: #ff4d6d;
+      color: #ffffff;
+      margin-right: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+    #no {
+      background-color: #1f1f1f;
+      color: #ffffff;
+      position: absolute;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <img src="valentine.jpg" alt="Us" style="max-width:300px; border-radius:20px; margin-bottom:20px;">
+  <h1>Will you be my Valentine? 💖</h1>
+  <button id="yes">Yes</button>
+  <button id="no">No</button>
+</div>
+
+<script>
+const noBtn = document.getElementById("no");
+const yesBtn = document.getElementById("yes");
+let yesSize = 22;
+
+function moveNo() {
+  const x = Math.random() * (window.innerWidth - 120);
+  const y = Math.random() * (window.innerHeight - 80);
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+
+  yesSize += 6;
+  yesBtn.style.fontSize = yesSize + "px";
+}
+
+noBtn.addEventListener("mouseover", moveNo);
+noBtn.addEventListener("touchstart", moveNo);
+
+yesBtn.addEventListener("click", () => {
+  // Email senden
+  emailjs.send("service_ho95c7a", "template_3jn4o5a", {})
+    .then(() => {
+      alert("Yay! Email sent 💌");
+    }, (err) => {
+      alert("Oops, something went wrong: " + JSON.stringify(err));
+    });
+
+  // Nachricht anzeigen
+  document.body.innerHTML = "<h1 style='color:white; text-align:center;'>Yay 💘🥰<br>Best Valentine ever</h1>";
+});
+</script>
+
+</body>
+</html>
